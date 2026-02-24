@@ -1,0 +1,39 @@
+name: CI (hecate-app-noded)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'hecate-app-noded/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'hecate-app-noded/**'
+
+jobs:
+  daemon:
+    name: Daemon (compile + test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hecate-app-noded
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: "27"
+          rebar3-version: "3.24"
+
+      - name: Cache rebar3 deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            hecate-app-noded/_build/default/lib
+            hecate-app-noded/_build/default/plugins
+          key: rebar3-${{ runner.os }}-${{ hashFiles('hecate-app-noded/rebar.config') }}
+          restore-keys: rebar3-${{ runner.os }}-
+
+      - run: rebar3 compile
+      - run: rebar3 eunit
+      - run: rebar3 dialyzer

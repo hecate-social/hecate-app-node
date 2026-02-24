@@ -1,0 +1,27 @@
+{application, hecate_app_noded, [
+    {description, "Hecate Node Plugin Manager"},
+    {vsn, "0.1.0"},
+    {registered, [hecate_app_noded_sup]},
+    {mod, {hecate_app_noded_app, []}},
+    {applications, [
+        kernel,
+        stdlib,
+        crypto,
+        ssl,
+        inets,
+        cowboy,
+        reckon_db,
+        evoq,
+        reckon_evoq,
+        esqlite
+    ]},
+    {env, [
+        {data_dir, "~/.hecate/hecate-app-noded"},
+        {api_socket_name, "api.sock"}
+    ]},
+    {modules, []},
+    {licenses, ["Apache-2.0"]},
+    {links, [
+        {"GitHub", "https://github.com/hecate-social/hecate-node"}
+    ]}
+]}.

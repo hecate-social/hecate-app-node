@@ -1,0 +1,18 @@
+{application, project_node, [
+    {description, "Node projections (PRJ) - event subscriptions and read model writes"},
+    {vsn, "0.1.0"},
+    {registered, [project_node_sup, project_node_store]},
+    {mod, {project_node_app, []}},
+    {applications, [
+        kernel,
+        stdlib,
+        esqlite,
+        evoq,
+        hecate_app_noded,
+        guide_plugin_lifecycle
+    ]},
+    {env, []},
+    {modules, []},
+    {licenses, ["Apache-2.0"]},
+    {links, [{"GitHub", "https://github.com/hecate-social/hecate-node"}]}
+]}.

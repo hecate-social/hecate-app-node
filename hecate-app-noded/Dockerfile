@@ -1,7 +1,7 @@
 ## Stage 1: Build
 FROM erlang:27-alpine AS build
 
-RUN apk add --no-cache git
+RUN apk add --no-cache git build-base
 
 WORKDIR /app
 
